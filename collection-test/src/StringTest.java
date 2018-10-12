@@ -14,9 +14,11 @@ public class StringTest {
         map.put(string2,2);
         System.out.println(map.toString());
         StringBuffer string3 = string1;
-        string3.append("b");
+//        string3.append("b");
         System.out.println(map.toString());
-
+        StringBuffer string4 = new StringBuffer("ab");
+        System.out.println(string2.equals(string4));
+        System.out.println(map.get(string4));
     }
 
 //    public static String strAppend(String str){
