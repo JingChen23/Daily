@@ -21,26 +21,32 @@ public class Solution8 {
             }
             if(charArray[index] == '-'){
                 negative = true;
+                index++;
             }
-            index++;
+            else if(charArray[index] == '+')
+                index++;
+//            index++;
             break;
         }
 
         while (index < charArray.length){
-            if(index == ' ') break;
+            if(charArray[index] == ' ') break;
             if (!dic[charArray[index]]) break;
+            int newNum = charArray[index] - '0';
+            if (!negative && (result > Integer.MAX_VALUE/10 || result == Integer.MAX_VALUE/10 && newNum > 7 )) return Integer.MAX_VALUE;
+            if (negative && (result > Integer.MAX_VALUE/10 || result == Integer.MAX_VALUE/10 && newNum > 8 )) return Integer.MIN_VALUE;
             result *= 10;
-            result += charArray[index] - '0';
+            result += newNum;
             index ++;
         }
         if (negative) result = -result;
         return result;
-
     }
 
     public static void main(String[] args) {
         Solution8 solution8 = new Solution8();
-        String str = "-123";
+//        System.out.println(Integer.MAX_VALUE);
+        String str = "000000000000000000000000000000000001";
         System.out.println(solution8.myAtoi(str));
     }
 }
