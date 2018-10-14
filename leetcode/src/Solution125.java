@@ -22,7 +22,7 @@ class Solution125 {
 
     public boolean equanlsIgnoreCase(char a, char b){
         if (a == b) return true;
-        if ((a-b == 32 || b-a == 32) && ()) return true;
+        if ((a-b == 32 || b-a == 32)) return true;
         return false;
     }
 
