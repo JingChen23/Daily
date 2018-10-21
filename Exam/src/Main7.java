@@ -20,19 +20,35 @@ public class Main7{
             }
         }
 
-        int result = computeCoins(0, 0, 0);
+//        if (map[0][0] == -1) System.out.println(-1);
 
-        System.out.println(result);
+        for (int i = 1; i < columnNum; i++){
+            if (map[0][i-1] <= 0) map[0][i] = -1;
+            else map[0][i] += map[0][i-1];
+        }
+
+        for (int j = 1; j < rowNum; j++){
+            if (map[j-1][0] <= 0) map[j][0] = -1;
+            else map[j][0] += map[j-1][0];
+        }
+
+//        System.out.println(Arrays.deepToString(map));
+
+        int curRow = 1;
+        while (curRow < rowNum){
+            for (int curCol = 1; curCol < columnNum; curCol++){
+                if (map[curRow][curCol-1] < 0 && map[curRow-1][curCol] < 0){
+                    map[curRow][curCol] = -1;
+                }
+                else
+                    map[curRow][curCol] += Math.max(map[curRow][curCol-1],map[curRow-1][curCol]);
+            }
+            curRow++;
+        }
+        if (map[rowNum-1][columnNum-1] < 0) map[rowNum-1][columnNum-1] = -1;
+        System.out.println(map[rowNum-1][columnNum-1]);
     }
 
-    public static int computeCoins (int x, int y, int coins){
-        if (x >= rowNum || y >= columnNum) return -1;
-        int thisStep = map[x][y];
-        if (x == rowNum-1 && y == columnNum -1) return (coins + thisStep);
-        if (thisStep == 0 || thisStep < 0 && coins + thisStep < 0) return -1;
-        int down = computeCoins(x+1, y, coins + thisStep);
-        int right = computeCoins(x, y+1, coins + thisStep);
-        return (down > right)? down : right;
-    }
+
 
 }
