@@ -10,16 +10,12 @@ public class Main5 {
             numbers[i] = new Number(in.nextInt());
         }
         Arrays.sort(numbers);
-//        System.out.println(Arrays.toString(numbers));
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = n-1; i >=0 ; i--){
+        for (int i = 0; i < n ; i++){
             stringBuilder.append(Integer.toString(numbers[i].num));
         }
         String temp = stringBuilder.toString();
         System.out.println(temp);
-//        Number a = new Number(3323);
-//        Number b = new Number(390);
-//        System.out.println(a.compareTo(b));
     }
 }
 
@@ -38,7 +34,15 @@ class Number implements Comparable{
     public int compareTo(Object o) {
         String s1 = this.toString();
         String s2 = o.toString();
-        return s1.compareTo(s2);
+        int result = s1.compareTo(s2);
+        if (s1.contains(s2) || s2.contains(s1)){
+            int a = Integer.parseInt(s1+s2);
+            int b = Integer.parseInt(s2+s1);
+            if(a < b) result = -1;
+            else if (a>b) result = 1;
+            else return 0;
+        }
+        return result;
     }
 
     @Override
